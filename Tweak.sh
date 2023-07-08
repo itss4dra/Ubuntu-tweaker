@@ -7,7 +7,6 @@ optimize_system() {
     enable_tcp_bbr
     sudo apt autoremove -y
     sudo apt clean
-    disable_services
     configure_swappiness
     disable_ipv6
     echo "System optimization complete!"
@@ -22,11 +21,7 @@ disable_tcp_bbr() {
     sudo sysctl -p
     echo "TCP BBR disabled."
 }
-disable_services() {
-    sudo systemctl disable bluetooth
-    sudo systemctl stop bluetooth
-    echo "Bluetooth service disabled."
-}
+
 
 configure_swappiness() {
     echo "vm.swappiness=10" | sudo tee -a /etc/sysctl.conf
