@@ -10,7 +10,9 @@ optimize_system() {
     
     configure_swappiness
     disable_ipv6
-    echo "System optimization complete!"
+    echo "==============================="
+    echo "=============DONE=============="
+    echo "==============================="
 }
 enable_tcp_bbr() {
     echo "net.ipv4.tcp_congestion_control=bbr" | sudo tee -a /etc/sysctl.conf
@@ -19,12 +21,13 @@ enable_tcp_bbr() {
     echo "ClientAliveCountMax 3" | sudo tee -a /etc/ssh/sshd_config
     sudo sysctl -p
     sudo systemctl restart ssh
-    echo "TCP BBR enabled."
+    echo "==============================="
 }
 disable_tcp_bbr() {
     sudo sed -i '/net.ipv4.tcp_congestion_control=bbr/d' /etc/sysctl.conf
+    sudo sed -i '/net.ipv4.icmp_echo_ignore_all=1/d' /etc/sysctl.conf
     sudo sysctl -p
-    echo "TCP BBR disabled."
+    echo "==============================="
 }
 
 
