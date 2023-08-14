@@ -18,6 +18,7 @@ enable_tcp_bbr() {
     echo "ClientAliveInterval 60" | sudo tee -a /etc/ssh/sshd_config
     echo "ClientAliveCountMax 3" | sudo tee -a /etc/ssh/sshd_config
     sudo sysctl -p
+    sudo systemctl restart ssh
     echo "TCP BBR enabled."
 }
 disable_tcp_bbr() {
