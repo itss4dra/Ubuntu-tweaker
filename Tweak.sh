@@ -15,6 +15,8 @@ optimize_system() {
 enable_tcp_bbr() {
     echo "net.ipv4.tcp_congestion_control=bbr" | sudo tee -a /etc/sysctl.conf
     echo "net.ipv4.icmp_echo_ignore_all=1" | sudo tee -a /etc/sysctl.conf
+    echo "ClientAliveInterval 60" | sudo tee -a /etc/ssh/sshd_config
+    echo "ClientAliveCountMax 3" | sudo tee -a /etc/ssh/sshd_config
     sudo sysctl -p
     echo "TCP BBR enabled."
 }
