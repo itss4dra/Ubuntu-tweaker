@@ -7,12 +7,14 @@ optimize_system() {
     enable_tcp_bbr
     sudo apt autoremove -y
     sudo apt clean
+    
     configure_swappiness
     disable_ipv6
     echo "System optimization complete!"
 }
 enable_tcp_bbr() {
     echo "net.ipv4.tcp_congestion_control=bbr" | sudo tee -a /etc/sysctl.conf
+    echo "net.ipv4.icmp_echo_ignore_all=1" | sudo tee -a /etc/sysctl.conf
     sudo sysctl -p
     echo "TCP BBR enabled."
 }
