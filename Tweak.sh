@@ -19,8 +19,10 @@ enable_tcp_bbr() {
     echo "net.ipv4.icmp_echo_ignore_all=1" | sudo tee -a /etc/sysctl.conf
     echo "ClientAliveInterval 60" | sudo tee -a /etc/ssh/sshd_config
     echo "ClientAliveCountMax 3" | sudo tee -a /etc/ssh/sshd_config
+    echo "Ciphers aes128-gcm@openssh.com,aes128-ctr" | sudo tee -a /etc/ssh/sshd_config
     sudo sysctl -p
     sudo systemctl restart ssh
+    sudo systemctl restart sshd
     echo "==============================="
 }
 disable_tcp_bbr() {
